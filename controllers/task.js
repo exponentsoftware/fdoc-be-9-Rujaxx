@@ -20,7 +20,8 @@ exports.addTodo = (req, res) => {
       title: req.body.title,
       description: req.body.description,
       category: req.body.category,
-      done: req.body.done
+      done: req.body.done,
+      userId : req.user.id
     };
   
     // Save task in the database
@@ -144,15 +145,18 @@ exports.getDone = (req, res) => {
   
  
 
-
+// @desc      add comment done tasks
+// @route     POST /api/v1/tasks/:id
+// @access    Private 
 exports.addComment = (req, res) => {
     if(!req.body){
         res.send("add a comment") 
     }
-let taskId = req.params.id
+  let taskId = req.params.id
     return Comment.create({
       description: req.body.description,
       taskId: taskId,
+      userId : req.user.id
     })
       .then((comment) => {
         res.status(200).json({succces : true, data : comment})

@@ -1,6 +1,7 @@
 const Sequelize = require('sequelize')
 const db = require('../config/db')
-const Tag = require('../models/Tag')
+const Tag = require('./Tag')
+const User = require('./User')
 
 const Task = db.define('task',{
     title :{
@@ -23,11 +24,11 @@ const Task = db.define('task',{
     },
 })
 
-// Task.belongsToMany(Tag, {
-//     through: "tag_task",
-//     as: "tags",
-//     foreignKey: "task_id",
-//   });
+User.hasMany(Task, { as: "tasks" , onDelete : "cascade"});
+Task.belongsTo(User, {
+  foreignKey: "userId",
+  as: "User",
+});
 
 
 module.exports = Task;

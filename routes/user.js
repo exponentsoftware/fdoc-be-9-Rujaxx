@@ -3,22 +3,20 @@ const express = require('express')
 const db = require('../config/db')
 const Task = require('../models/Task')
 
-const { addUser,getAll,getOne,update,getDone,deleteOne } = require('../controllers/user')
+const { getAll,getOne } = require('../controllers/user')
 
 
 const router = express.Router();
 
+const { protect,authorize } = require('../middlewares/auth')
+
 router
 .route('/')
-.get(getAll)
-.post(addUser)
-
-router.route('/done').get(getDone)
+.get(protect,authorize('admin'),getAll)
 
 router.route('/:id')
-.get(getOne)
-.put(update)
-.delete(deleteOne)
+.get(protect,getOne)
+
 
 
 

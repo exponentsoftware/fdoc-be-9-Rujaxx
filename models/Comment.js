@@ -10,7 +10,13 @@ const Comment = db.define('comment',{
     }
 })
 
-Task.hasMany(Comment, { as: "comments" });
+User.hasMany(Comment, { as: "comments", onDelete : "cascade"});
+Comment.belongsTo(User, {
+  foreignKey: "userId",
+  as: "User",
+});
+
+Task.hasMany(Comment, { as: "comments" , onDelete : "cascade"});
 Comment.belongsTo(Task, {
   foreignKey: "taskId",
   as: "Task",

@@ -73,4 +73,21 @@ exports.deleteOne = (req, res) => {
         });
       });
   };
+
+// @desc      GET one tasks
+// @route     GET /api/v1/tasks/:id
+// @access    Private
+exports.getOne = (req, res) => {
+  const id = req.params.id;
+
+  Comment.findByPk(id)
+    .then(comment => {
+      res.status(200).json(comment);
+    })
+    .catch(err => {
+      res.status(500).json({
+        message: "Error retrieving comment with id=" + id
+      });
+    });
+}; 
  

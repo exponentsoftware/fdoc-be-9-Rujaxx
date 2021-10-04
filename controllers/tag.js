@@ -15,8 +15,8 @@ exports.create = (req,res) => {
   };
 
   exports.addTag = (req,res) => {
-    let taskId = req.params.id
-    let tagId = req.body.id
+    let taskId = req.body.id  
+    let tagId = req.params.id
     Tag.findByPk(tagId)
       .then((tag) => {
         if (!tag) {
@@ -27,7 +27,7 @@ exports.create = (req,res) => {
               res.status(400).json({success: false, message : "task not found!"})
           }
   
-          tag.addTutorial(task);
+          tag.addTask(task);
           res.status(200).json({success: true, data : task})
         });
       })

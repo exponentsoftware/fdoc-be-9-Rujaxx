@@ -10,6 +10,7 @@ dotenv.config({path : "./config/config.env"})
 //routes
 const task = require('./routes/task')
 const user = require('./routes/user')
+const auth = require('./routes/auth')
 const comment = require('./routes/comment')
 const tag = require('./routes/tag')
 
@@ -34,6 +35,7 @@ app.use(cors());
 
 app.use('/api/v1/tasks',task)
 app.use('/api/v1/users',user)
+app.use('/api/v1/auth',auth)
 app.use('/api/v1/comments',comment)
 app.use('/api/v1/tags',tag)
 

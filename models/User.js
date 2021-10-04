@@ -30,7 +30,6 @@ const User = db.define('user',{
         set(value) {
             const salt = bcrypt.genSaltSync(10)
             const hash = bcrypt.hashSync(value,salt)
-            console.log(hash)
             this.setDataValue('password', hash);
           }
     },
@@ -39,5 +38,12 @@ const User = db.define('user',{
         defaultValue:"user"
     }
 })
+
+
+//compare passowrds
+User.prototype.validPassword = function (password) {
+    console.log(password)
+    return bcrypt.compareSync(password, this.password);
+};
 
 module.exports = User;

@@ -8,18 +8,20 @@ const { addTodo,getAll,getOne,update,getDone,deleteOne,addComment } = require('.
 
 const router = express.Router();
 
+const { protect } = require('../middlewares/auth')
+
 router
 .route('/')
-.get(getAll)
-.post(addTodo)
+.get(protect,getAll)
+.post(protect,addTodo)
 
-router.route('/done').get(getDone)
+router.route('/done').get(protect,getDone)
 
 router.route('/:id')
-.get(getOne)
-.put(update)
-.delete(deleteOne)
-.post(addComment)
+.get(protect,getOne)
+.put(protect,update)
+.delete(protect,deleteOne)
+.post(protect,addComment)
 
 
 
